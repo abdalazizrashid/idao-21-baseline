@@ -34,7 +34,8 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
     for _, (img, name) in enumerate(iter(dataloader)):
         if mode == "classification":
             dict_pred["id"].append(name[0].split(".")[0])
-            output = 1 if torch.round(model(img)["class"].detach()[0][0]) == 0 else 0
+            output = 1 if torch.round(
+                model(img)["class"].detach()[0][0]) == 0 else 0
             dict_pred["classification_predictions"].append(output)
 
         else:

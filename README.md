@@ -101,5 +101,5 @@ python generate_submission.py
 ```
 And then zip your solution
 ```
-zip submission.zip foo/*
+zip -r submission.zip foo/*
 ```

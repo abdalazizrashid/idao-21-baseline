@@ -2,6 +2,15 @@
 ## FAQ
 - Why I can't install new packages?
     There is no internet connection in the submission instance.
+- What packages are install in the Yandex Contest instance?
+```
+pytorch, torchvision, numpy, scipy, pandas, scikit-learn, 
+joblib, tqdm, ipython, cython, numba, statsmodels, pqdict, xlearn,
+ml_metrics, tsfresh, mlxtend, h5py, tempita, xgboost, lightgbm, catboost,
+tensorflow, keras, pytorch-lightning
+```
+- I need package `foo` and it's absolutely important, what can I do?
+- If your soultion relies on the package entirely you may submit a pull request of ask to add it directly.
 
 ## Dataset
 Dataset is available for download through Yandex disk -> [Click here](https://yadi.sk/d/UJ8DEma9LHRMsg).

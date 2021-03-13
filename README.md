@@ -1,4 +1,7 @@
 # IDAO-21 Baseline
+## FAQ
+- Why I can't install new packages?
+    There is no internet connection in the submission instance.
 
 ## Dataset
 Dataset is available for download through Yandex disk -> [Click here](https://yadi.sk/d/UJ8DEma9LHRMsg).

@@ -1,5 +1,5 @@
 all: build
-	
+
 build:
 	echo "PING!"
 run:

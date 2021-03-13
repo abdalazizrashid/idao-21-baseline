@@ -99,4 +99,7 @@ To generate `submission.csv` run:
 ```
 python generate_submission.py
 ```
-
+And then zip your solution
+```
+zip submission.zip foo/*
+```

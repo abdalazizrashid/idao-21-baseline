@@ -2,10 +2,13 @@ import pathlib as path
 
 import pytorch_lightning as pl
 import torch
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader
+from torch.utils.data import random_split
 from torchvision import transforms
 
-from .dataloader import IDAODataset, InferenceDataset, img_loader
+from .dataloader import IDAODataset
+from .dataloader import img_loader
+from .dataloader import InferenceDataset
 
 
 class IDAODataModule(pl.LightningDataModule):

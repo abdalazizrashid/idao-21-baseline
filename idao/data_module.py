@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import DataLoader, random_split
 from torchvision import transforms
 
-from .dataloader import IDAODataset, img_loader, InferenceDataset
+from .dataloader import IDAODataset, InferenceDataset, img_loader
 
 
 class IDAODataModule(pl.LightningDataModule):

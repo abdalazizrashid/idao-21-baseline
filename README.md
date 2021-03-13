@@ -3,7 +3,7 @@
 - Why I can't install new packages?
 
 There is no internet connection in the submission instance.
-- What packages are install in the Yandex Contest instance?
+- What packages are installed in the Yandex Contest instance?
 ```
 pytorch, torchvision, numpy, scipy, pandas, scikit-learn, 
 joblib, tqdm, ipython, cython, numba, statsmodels, pqdict, xlearn,

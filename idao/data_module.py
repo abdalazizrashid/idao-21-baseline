@@ -15,23 +15,24 @@ class IDAODataModule(pl.LightningDataModule):
         self.batch_size = batch_size
         self.cfg = cfg
 
-    def prepare_data(self):
+    def prepare_data(self, inference=None):
         # called only on 1 GPU
-        self.dataset = IDAODataset(
-            root=self.data_dir.joinpath("train"),
-            loader=img_loader,
-            transform=transforms.Compose(
-                [transforms.ToTensor(), transforms.CenterCrop(120)]
-            ),
-            target_transform=transforms.Compose(
-                [
-                    lambda num: (
-                        torch.tensor([0, 1]) if num == 0 else torch.tensor([1, 0])
-                    )
-                ]
-            ),
-            extensions=self.cfg["DATA"]["Extension"],
-        )
+        if not inference:
+            self.dataset = IDAODataset(
+                root=self.data_dir.joinpath("train"),
+                loader=img_loader,
+                transform=transforms.Compose(
+                    [transforms.ToTensor(), transforms.CenterCrop(120)]
+                ),
+                target_transform=transforms.Compose(
+                    [
+                        lambda num: (
+                            torch.tensor([0, 1]) if num == 0 else torch.tensor([1, 0])
+                        )
+                    ]
+                ),
+                extensions=self.cfg["DATA"]["Extension"],
+            )
 
         self.public_dataset = InferenceDataset(
                     main_dir=self.data_dir.joinpath("public_test"),
@@ -65,7 +66,7 @@ class IDAODataModule(pl.LightningDataModule):
     def test_dataloader(self):
         return DataLoader(
             torch.utils.data.ConcatDataset([self.private_dataset, self.public_dataset]),
-            1,
+            self.batch_size,
             num_workers=0,
             shuffle=False
             )

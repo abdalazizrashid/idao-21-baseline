@@ -42,7 +42,7 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
         else:
             output = model(img)["energy"].detach()
             dict_pred["regression_predictions"].append(output[0][0].item())
-
+ 
 
 def main(cfg):
     PATH = path.Path(cfg["DATA"]["DatasetPath"])
@@ -51,8 +51,7 @@ def main(cfg):
         data_dir=PATH, batch_size=64, cfg=cfg
     )
 
-    dataset_dm.prepare_data()
-    dataset_dm.setup()
+    dataset_dm.prepare_data(inference=True)
     dl = dataset_dm.test_dataloader()
 
     for mode in ["regression", "classification"]:
@@ -62,7 +61,6 @@ def main(cfg):
             model_path = cfg["REPORT"]["RegressionCheckpoint"]
 
         make_csv(mode, dl, model_path, cfg=cfg)
-
     data_frame = pd.DataFrame(dict_pred, columns=["id", "classification_predictions", "regression_predictions"])
     data_frame.to_csv('submission.csv', index=False, header=True)
 

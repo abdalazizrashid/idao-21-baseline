@@ -54,7 +54,7 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
 def main(cfg):
     PATH = path.Path(cfg["DATA"]["DatasetPath"])
 
-    dataset_dm = IDAODataModule(data_dir=PATH, batch_size=64, cfg=cfg)
+    dataset_dm = IDAODataModule(data_dir=PATH, batch_size=cfg['TRAINING']['BatchSize'], cfg=cfg)
 
     dataset_dm.prepare_data(inference=True)
     dl = dataset_dm.test_dataloader()

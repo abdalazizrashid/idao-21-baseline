@@ -5,23 +5,20 @@ import pathlib as path
 import sys
 from collections import defaultdict
 from itertools import chain
-from collections import defaultdict
 
-import timm
-import cv2
 import albumentations
-
+import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scikitplot as skplt
+import timm
 import torch
 from more_itertools import bucket
 
 from idao.data_module import IDAODataModule
 from idao.model import SimpleConv
 from idao.utils import delong_roc_variance
-
 
 dict_pred = defaultdict(list)
 

@@ -23,8 +23,8 @@ from idao.model import SimpleConv
 from idao.utils import delong_roc_variance
 
 
-
 dict_pred = defaultdict(list)
+
 
 def make_csv(mode, dataloader, checkpoint_path, cfg):
     torch.multiprocessing.set_sharing_strategy("file_system")
@@ -40,7 +40,8 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
     for _, (img, name) in enumerate(iter(dataloader)):
         if mode == "classification":
             dict_pred["id"].append(name[0].split('.')[0])
-            output = (1 if torch.round(model(img)["class"].detach()[0][0]) == 0 else 0)
+            output = (1 if torch.round(
+                model(img)["class"].detach()[0][0]) == 0 else 0)
             dict_pred["classification_predictions"].append(output)
 
         else:
@@ -67,7 +68,8 @@ def main(cfg):
 
         make_csv(mode, dl, model_path, cfg=cfg)
 
-    data_frame = pd.DataFrame(dict_pred, columns=["id", "classification_predictions", "regression_predictions"])
+    data_frame = pd.DataFrame(dict_pred, columns=[
+                              "id", "classification_predictions", "regression_predictions"])
     data_frame.to_csv('submission.csv', index=False, header=True)
 
 

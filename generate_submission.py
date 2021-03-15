@@ -1,25 +1,11 @@
 import configparser
-import gc
 import logging
 import pathlib as path
-import sys
+import torch
 from collections import defaultdict
-from itertools import chain
 
-import catboost
-import keras
-import lightgbm
-import matplotlib.pyplot as plt
-import numba
 import numpy as np
 import pandas as pd
-import scikitplot as skplt
-import scipy
-import sklearn
-import tensorflow
-import torch
-import xgboost
-from more_itertools import bucket
 
 from idao.data_module import IDAODataModule
 from idao.model import SimpleConv
@@ -42,8 +28,7 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
     for _, (img, name) in enumerate(iter(dataloader)):
         if mode == "classification":
             dict_pred["id"].append(name[0].split(".")[0])
-            output = 1 if torch.round(
-                model(img)["class"].detach()[0][0]) == 0 else 0
+            output = 1 if torch.round(model(img)["class"].detach()[0][0]) == 0 else 0
             dict_pred["classification_predictions"].append(output)
 
         else:
@@ -54,7 +39,9 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
 def main(cfg):
     PATH = path.Path(cfg["DATA"]["DatasetPath"])
 
-    dataset_dm = IDAODataModule(data_dir=PATH, batch_size=cfg['TRAINING']['BatchSize'], cfg=cfg)
+    dataset_dm = IDAODataModule(
+        data_dir=PATH, batch_size=cfg["TRAINING"]["BatchSize"], cfg=cfg
+    )
 
     dataset_dm.prepare_data(inference=True)
     dl = dataset_dm.test_dataloader()

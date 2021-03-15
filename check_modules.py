@@ -11,6 +11,7 @@ modules = [
     "scipy",
     "sklearn",
     "xgboost",
+    "tensorflow",
 ]
 
 

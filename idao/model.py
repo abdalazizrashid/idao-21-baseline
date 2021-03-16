@@ -89,7 +89,7 @@ class SimpleConv(pl.LightningModule):
                 class_pred, class_target.float()
             )
             self.valid_acc(torch.sigmoid(class_pred), class_target)
-            self.log("valid_acc", self.train_acc, on_step=True, on_epoch=False)
+            self.log("valid_acc", self.valid_acc.compute())
             self.log("classification_loss", class_loss)
             return class_loss
 

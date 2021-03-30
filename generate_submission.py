@@ -28,7 +28,8 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
     for _, (img, name) in enumerate(iter(dataloader)):
         if mode == "classification":
             dict_pred["id"].append(name[0].split(".")[0])
-            output = 1 if torch.round(model(img)["class"].detach()[0][0]) == 0 else 0
+            output = 1 if torch.round(
+                model(img)["class"].detach()[0][0]) == 0 else 0
             dict_pred["classification_predictions"].append(output)
 
         else:
@@ -39,9 +40,9 @@ def make_csv(mode, dataloader, checkpoint_path, cfg):
 def main(cfg):
     PATH = path.Path(cfg["DATA"]["DatasetPath"])
 
-    dataset_dm = IDAODataModule(
-        data_dir=PATH, batch_size=int(cfg["TRAINING"]["BatchSize"]), cfg=cfg
-    )
+    dataset_dm = IDAODataModule(data_dir=PATH,
+                                batch_size=int(cfg["TRAINING"]["BatchSize"]),
+                                cfg=cfg)
 
     dataset_dm.prepare_data(inference=True)
     dl = dataset_dm.test_dataloader()

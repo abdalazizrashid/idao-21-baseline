@@ -1,11 +1,11 @@
 import configparser
 import logging
 import pathlib as path
-import torch
 from collections import defaultdict
 
 import numpy as np
 import pandas as pd
+import torch
 
 from idao.data_module import IDAODataModule
 from idao.model import SimpleConv
